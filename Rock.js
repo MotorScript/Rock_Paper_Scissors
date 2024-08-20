@@ -15,7 +15,14 @@ function getRndInteger(min, max) {
 }
 
 let getUserChoice = () => prompt("Rock, Paper, or Scissors?").toLowerCase();
-
+let userChoice = null;
+try {
+    userChoice = getUserChoice();
+}
+catch (err) {
+    console.log("caught")
+    let userChoice = "Rock";
+}
 let randInt = getRndInteger(1, 4);
 let compChoice = "";
 
@@ -30,7 +37,6 @@ if (randInt === 1) {
 
 console.log(compChoice);
 
-let userChoice = getUserChoice();
 
 while (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
     userChoice = getUserChoice();
@@ -45,9 +51,15 @@ let win = (
 let tie = (userChoice == compChoice);
 
 if (win) {
-    console.log("YOU WIN!!!")
+    window.alert("YOU WIN!!!")
+    console.log("YOU WIN!!!");
 } else if (tie) {
-    console.log("TIE!")
+    window.alert("TIE!")
+    console.log("TIE!");
 } else {
-    console.log("YOU LOSE!")
+    window.alert("YOU LOSE!")
+    console.log("YOU LOSE!");
 }
+
+// For my wife :)
+// window.alert("YOU WIN!!")
