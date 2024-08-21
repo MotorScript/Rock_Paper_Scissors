@@ -67,6 +67,9 @@ const playGame = (userChoice, compChoice) => {
 
 }
 
-playGame(userChoice, compChoice)
+for (let i = 0; i == 5; i++) {
+
+    playGame(userChoice, compChoice);
+}
 // For my wife :)
 // window.alert("YOU WIN!!")
