@@ -2,33 +2,28 @@
 
 // Pseudocode
 
+// Declare score variables
+
+// Generate random number for computer choice
+
 // Get User's choice of Rock, Paper Scissors 
 
-// Generate a random choice of the computer of RPS
+// Call game function 5 times
 
-// Compare the choices
+// Compare the final scores
 
 // Declare a winner
+
+let userScore = 0;
+let compScore = 0;
+
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const getUserChoice = () => prompt("Rock, Paper, or Scissors?").toLowerCase();
-let userChoice = null;
 
-while (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
-    try {
-        userChoice = getUserChoice();
-    }
-    catch (err) {
-        console.log("caught")
-        userChoice = "Rock";
-    }
-}
-
-const getCompChoice = () => {
-    const randInt = getRndInteger(1, 4);
+const getCompChoice = (randInt) => {
     let compChoice = "";
     if (randInt === 1) {
         compChoice = "rock";
@@ -40,36 +35,69 @@ const getCompChoice = () => {
     return compChoice;
 }
 
-const compChoice = getCompChoice();
+const getUserChoice = () => {
+    let userChoice = null;
 
-const playGame = (userChoice, compChoice) => {
+    while (userChoice != "rock" && userChoice != "paper" && userChoice != "scissors") {
+        try {
+            userChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
+        }
+        catch (err) {
+            console.log("User canceled operation");
+        }
+    }
+    return userChoice;
+}
 
 
+const playGame = (compsChoice, usersChoice) => {
 
     const win = (
-        (userChoice == "rock" && compChoice == "scissors") ||
-        (userChoice == "paper" && compChoice == "rock") ||
-        (userChoice == "scissors" && compChoice == "paper")
+        (usersChoice == "rock" && compsChoice == "scissors") ||
+        (usersChoice == "paper" && compsChoice == "rock") ||
+        (usersChoice == "scissors" && compsChoice == "paper")
     );
 
-    const tie = (userChoice == compChoice);
+    const tie = (usersChoice == compsChoice);
 
     if (win) {
-        window.alert(`YOU WIN!!! ${userChoice} beats ${compChoice}!`)
+        window.alert(`YOU WIN!!! ${usersChoice} beats ${compsChoice}!`);
         console.log("YOU WIN!!!");
+        userScore += 1;
     } else if (tie) {
-        window.alert(`TIE! ${userChoice} ties with ${compChoice}!`)
+        window.alert(`TIE! ${usersChoice} ties with ${compsChoice}!`);
         console.log("TIE!");
     } else {
-        window.alert(`YOU LOSE! ${compChoice} beats ${userChoice}!`)
+        window.alert(`YOU LOSE! ${compsChoice} beats ${usersChoice}!`);
         console.log("YOU LOSE!");
+        compScore += 1;
     }
 
 }
 
-for (let i = 0; i == 5; i++) {
 
-    playGame(userChoice, compChoice);
+for (let i = 0; i <= 4; i++) {
+    console.log(i);
+    const userChoice = getUserChoice();
+    const compChoice = getCompChoice(getRndInteger(1, 4));
+    playGame(compChoice, userChoice);
+}
+
+if (userScore > compScore) {
+    window.alert(
+        `YOU WON OVERALL!! 
+        Your Wins: ${userScore}
+        Computer Wins: ${compScore}`);
+} else if (userScore == compScore) {
+    window.alert(
+        `YOU TIED OVERALL
+        Your Wins: ${userScore}
+        Computer Wins: ${compScore}`);
+} else {
+    window.alert(
+        `YOU LOST OVERALL
+        Your Wins: ${userScore}
+        Computer Wins: ${compScore}`);
 }
 // For my wife :)
 // window.alert("YOU WIN!!")
